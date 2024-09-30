@@ -1,33 +1,16 @@
-import { useLazyGetCommentsQuery } from "./commentsApiSlice"
 import { Comment } from "@/features/comments/comment"
-import { useAppDispatch, useAppSelector } from "@/app/hooks"
-import {
-  selectAllComments,
-  setComments,
-} from "@/features/comments/commentsSlice"
-import { useEffect } from "react"
-import { buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { CreateCommentModal } from "@/features/comments/create-comment-modal"
+import { type Comment as CommentType } from "@/features/comments/comments-slice"
 
-export function Comments() {
-  const [fetchComments, { data, isError, isLoading, isSuccess }] =
-    useLazyGetCommentsQuery()
-  const dispatch = useAppDispatch()
-  const comments = useAppSelector(selectAllComments)
+type Props = {
+  comments: CommentType[]
+  isError: boolean
+  isLoading: boolean
+}
 
-  const handleFetchComments = () => {
-    fetchComments(25)
-  }
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      dispatch(setComments(data.comments))
-    }
-  }, [data, dispatch, isSuccess])
+export function Comments({ comments, isError, isLoading }: Props) {
 
   if (isError) {
-    return <h1>There was an error!!!</h1>
+    return <h1 className="text-red-500">There was an error!!!</h1>
   }
 
   if (isLoading) {
@@ -36,18 +19,7 @@ export function Comments() {
 
   return (
     <>
-      <div className="absolute top-0 left-0">
-        <button
-          className={cn(buttonVariants({ variant: "default" }))}
-          onClick={handleFetchComments}
-          disabled={isLoading}
-        >
-          {isLoading ? "Fetching..." : "Fetch Comments"}
-        </button>
-
-        <CreateCommentModal />
-      </div>
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:p-0 p-2">
         {comments.length > 0 &&
           comments.map(({ body, id, user }) => (
             <Comment

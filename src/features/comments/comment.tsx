@@ -1,6 +1,6 @@
 import { DeleteIcon } from "lucide-react"
 import { useAppDispatch } from "@/app/hooks"
-import { deleteComment } from "@/features/comments/commentsSlice"
+import { deleteComment } from "@/features/comments/comments-slice"
 
 export function Comment({
   text,

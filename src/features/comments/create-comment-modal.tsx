@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { useState } from "react"
 import { useAppDispatch } from "@/app/hooks"
-import { createComment } from "@/features/comments/commentsSlice"
+import { createComment } from "@/features/comments/comments-slice"
 import { Input } from "@/components/ui/input"
 
 export function CreateCommentModal() {

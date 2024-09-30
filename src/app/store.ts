@@ -1,11 +1,11 @@
 import type { Action, ThunkAction } from "@reduxjs/toolkit"
 import { combineSlices, configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
-import { commentsApiSlice } from "@/features/comments/commentsApiSlice"
+import { commentsApiSlice } from "@/features/comments/comments-api-slice"
 
 import storage from "redux-persist/lib/storage"
 import { persistReducer, persistStore } from "redux-persist"
-import { commentsSlice } from "@/features/comments/commentsSlice"
+import { commentsSlice } from "@/features/comments/comments-slice"
 
 const persistConfig = {
   key: "root",
